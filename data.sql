@@ -1,4 +1,4 @@
-/* Populate database with sample data. */
+/* Vet clinic database: create animals table */
 
 INSERT INTO animals (id, name, date, weight_kg, neutered, escape_attempts) 
 VALUES (1, 'Agumon', '2020-02-03', 10.23, true, 0);
@@ -11,3 +11,67 @@ VALUES (3, 'Pikachu', '2021-01-07', 15.04, false, 1);
 
 INSERT INTO animals (id, name, date, weight_kg, neutered, escape_attempts) 
 VALUES (4, 'Devimon', '2017-05-12', 11, false, 5);
+
+/* Vet clinic database: query and update animals table */
+
+INSERT INTO animals (id, name, date, weight_kg, neutered, escape_attempts)
+VALUES (5, 'Charmander', '2020-02-08', -11, false, 0);
+
+INSERT INTO animals (id, name, date, weight_kg, neutered, escape_attempts)
+VALUES (6, 'Plantmon', '2021-11-15', -5.7, true, 2);
+
+INSERT INTO animals (id, name, date, weight_kg, neutered, escape_attempts)
+VALUES (7, 'Squirtle', '1993-04-02', -12.13, false, 3);
+
+INSERT INTO animals (id, name, date, weight_kg, neutered, escape_attempts)
+VALUES (8, 'Angemon', '2005-06-12', -45, true, 1);
+
+INSERT INTO animals (id, name, date, weight_kg, neutered, escape_attempts)
+VALUES (9, 'Boarmon', '2005-06-07', 20.4, true, 7);
+
+INSERT INTO animals (id, name, date, weight_kg, neutered, escape_attempts)
+VALUES (10, 'Blossom', '1998-10-13', 17, true, 3);
+
+INSERT INTO animals (id, name, date, weight_kg, neutered, escape_attempts)
+VALUES (11, 'Blossom', '2022-05-14', 22, true, 4);
+
+BEGIN;
+UPDATE animals
+SET species = 'unspecified';
+SELECT * FROM animals;
+ROLLBACK;
+SELECT * FROM animals;
+
+BEGIN;
+UPDATE animals
+SET species = 'digimon'
+WHERE name LIKE '%mon%';
+UPDATE animals
+SET species = 'pokemon'
+WHERE species IS NULL;
+SELECT * FROM animals;
+COMMIT;
+SELECT * FROM animals;
+
+BEGIN;
+DELETE FROM animals;
+SELECT * FROM animals;
+ROLLBACK;
+SELECT * FROM animals;
+
+BEGIN;
+DELETE FROM animals
+WHERE date > '2022-01-01';
+SELECT * FROM animals;
+SAVEPOINT s1;
+UPDATE animals
+SET weight_kg = weight_kg * -1;
+SELECT * FROM animals;
+ROLLBACK TO s1;
+SELECT * FROM animals;
+UPDATE animals
+SET weight_kg = weight_kg * -1
+WHERE weight_kg < 0;
+SELECT * FROM animals;
+COMMIT;
+SELECT * FROM animals;

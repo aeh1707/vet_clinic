@@ -1,4 +1,4 @@
-/* Database schema to keep the structure of entire database. */
+/* Vet clinic database: create animals table */
 
 CREATE DATABASE vet_clinic;
 
@@ -11,3 +11,8 @@ CREATE TABLE animals (
     weight_kg DECIMAL NOT NULL,
     PRIMARY KEY(id)
 );
+
+/* Vet clinic database: query and update animals table */
+
+ALTER TABLE animals
+ADD species VARCHAR;
