@@ -16,3 +16,32 @@ CREATE TABLE animals (
 
 ALTER TABLE animals
 ADD species VARCHAR;
+
+/* Vet clinic database: query multiple tables */
+
+CREATE TABLE owners (
+    id INT GENERATED ALWAYS AS IDENTITY,
+    full_name VARCHAR,
+    age INT,
+    PRIMARY KEY(id)
+);
+
+CREATE TABLE species (
+    id INT GENERATED ALWAYS AS IDENTITY,
+    name VARCHAR,
+    PRIMARY KEY(id)
+);
+
+ALTER TABLE animals
+ALTER COLUMN id SET GENERATED ALWAYS;
+
+ALTER TABLE animals
+DROP COLUMN species;
+
+ALTER TABLE animals
+ADD species_id INT REFERENCES species(id);
+
+ALTER TABLE animals
+ADD owners_id INT REFERENCES owners(id);
+
+
